@@ -1,14 +1,41 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState = {
+// _id(pin):"65d3bc2524f605001937d4fc"
+// comment(pin):"nosdasd"
+// rate(pin):4
+// elementId(pin):"0425264041"
+// author(pin):"fraco92@gmail.com"
+// createdAt(pin):"2024-02-19T20:37:57.587Z"
+// updatedAt(pin):"2024-02-21T15:51:27.574Z"
+// __v(pin):0
+
+interface comment {
+  _id: string,
+  comment: string,
+  rate: number,
+  elementId: string,
+  author: string,
+  createdAt: string,
+  updatedAt: string,
+  __v: number
+}
+
+interface initialStateInterface {
+  commentsList: comment[],
+  loading: boolean,
+  commentRefresh: boolean,
+  error: string | null 
+}
+
+const initialState: initialStateInterface = {
   commentsList: [],
   loading: false,
   commentRefresh: false,
   error: "",
 };
 
-export const getComments = createAsyncThunk(
+export const getComments: any = createAsyncThunk(
   "comments/GETComments",
   async (id) => {
     try {
@@ -58,10 +85,10 @@ const commentsSlice = createSlice({
   },
 });
 
-export const allComments = (state) => state.commentsData.commentsList;
-export const isAllCommentsLoading = (state) => state.commentsData.loading;
-export const isCommentRefreshed = (state) => state.commentsData.commentRefresh;
-export const isAllCommentsError = (state) => state.commentsData.error;
+export const allComments = ({commentsData: {commentsList}}: {commentsData: {commentsList: comment[]}}) => commentsList;
+export const isAllCommentsLoading = ({commentsData: {loading}}: {commentsData: {loading: boolean}}) => loading;
+export const isCommentRefreshed = ({commentsData: {commentRefresh}}: {commentsData: {commentRefresh: boolean}}) => commentRefresh;
+export const isAllCommentsError = ({commentsData: {error}}: {commentsData: {error: string | null}}) => error;
 export const { handleCommentRefresh, handleError } = commentsSlice.actions;
 
 export default commentsSlice.reducer;

@@ -6,7 +6,7 @@ import {
     Avatar,
   } from "@material-tailwind/react";
    
-  function StarIcon() {
+  function StarIcon(): React.ReactElement {
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -23,7 +23,7 @@ import {
     );
   }
 
-  const calcStars = (number) => {
+  const calcStars = (number: number) => {
     const stars = []
     for (let i = 0; i < number; i++) {
         stars.push(<StarIcon key={i}/>)
@@ -31,16 +31,18 @@ import {
     return stars
   }
    
-  export default function SingleComment({text, rating, user}) {
+  export default function SingleComment({text, rating, user}: {text: string, rating: number, user: string}) {
     return (
-      <Card color="transparent" shadow={false} className="w-full border-solid border-2 rounded-lg border-slate-200 px-2 my-2">
+      <Card placeholder="" color="transparent" shadow={false} className="w-full border-solid border-2 rounded-lg border-slate-200 px-2 my-2">
         <CardHeader
+        placeholder=""
           color="transparent"
           floated={false}
           shadow={false}
           className="mx-0 flex items-center gap-4 pt-0 pb-8"
         >
           <Avatar
+          placeholder=""
             size="lg"
             variant="circular"
             src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
@@ -48,7 +50,7 @@ import {
           />
           <div className="flex w-5/6 flex-col gap-0.5">
             <div className="flex items-center justify-between">
-              <Typography variant="h5" color="blue-gray" className="text-base">
+              <Typography placeholder="" variant="h5" color="blue-gray" className="text-base">
                 {user}
               </Typography>
               <div className="5 flex items-center gap-0">
@@ -57,8 +59,8 @@ import {
             </div>
           </div>
         </CardHeader>
-        <CardBody className="mb-6 p-0">
-          <Typography>
+        <CardBody placeholder="" className="mb-6 p-0">
+          <Typography placeholder="">
             &quot;{text}&quot;
           </Typography>
         </CardBody>

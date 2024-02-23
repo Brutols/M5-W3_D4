@@ -1,7 +1,29 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const initialState = {
+// asin:"1940026091"
+// title:"Pandemic (The Extinction Files, Book 1)"
+// img:"https://images-na.ssl-images-amazon.com/images/I/91xrEMcvmQL.jpg"
+// price:7.81
+// category:"scifi"
+
+interface book {
+  asin: string,
+  title: string,
+  img: string,
+  price: number,
+  category: string
+}
+
+interface initialStateInterface {
+  books: book[],
+  filteredBooks: book[] | null,
+  loading: boolean,
+  error: string | null,
+  selected: string | null
+}
+
+const initialState: initialStateInterface = {
   books: [],
   filteredBooks: [],
   loading: false,
@@ -59,11 +81,11 @@ const booksSlice = createSlice({
   },
 });
 
-export const allBooks = (state) => state.booksData.books;
-export const allFilteredBooks = (state) => state.booksData.filteredBooks;
-export const isAllBooksLoading = (state) => state.booksData.loading;
-export const isAllBooksError = (state) => state.booksData.error;
-export const isSelected = (state) => state.booksData.selected;
+export const allBooks = ({booksData: {books}}: {booksData: {books: book[]}}) => books;
+export const allFilteredBooks = ({booksData: {filteredBooks}}: {booksData: {filteredBooks: book[]}}) => filteredBooks;
+export const isAllBooksLoading = ({booksData: {loading}}: {booksData: {loading: boolean}}) => loading;
+export const isAllBooksError = ({booksData: {error}}: {booksData: {error: string | null}}) => error;
+export const isSelected = ({booksData: {selected}}: {booksData: {selected: string | null}}) => selected;
 export const { filterBooks, handleSelection } = booksSlice.actions;
 
 export default booksSlice.reducer;
